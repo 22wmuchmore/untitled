@@ -24,10 +24,7 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onGesture(Gesture.TiltLeft, function () {
-    sprite = game.createSprite(2, 2)
-    sprite.move(1)
-    basic.pause(100)
-    sprite.ifOnEdgeBounce()
+	
 })
 input.onGesture(Gesture.ScreenDown, function () {
     basic.showNumber(minutes)
@@ -185,18 +182,24 @@ basic.forever(function () {
         music.stopAllSounds()
     }
     if (minutes == 830) {
-        basic.showString("EXERSIZE ")
+        basic.showString("exercise")
     }
     if (minutes == 930) {
-        basic.showString("EXERSIZE ")
+        basic.showString("exercise")
     }
     if (minutes == 1030) {
-        basic.showString("EXERSIZE ")
+        basic.showString("exercise")
     }
     if (minutes == 1130) {
-        basic.showString("EXERSIZE ")
+        basic.showString("exercise")
     }
     if (minutes == 2400) {
         Steps = 0
+    }
+    if (input.isGesture(Gesture.TiltLeft)) {
+        sprite = game.createSprite(2, 2)
+        sprite.move(1)
+        basic.pause(100)
+        sprite.ifOnEdgeBounce()
     }
 })
