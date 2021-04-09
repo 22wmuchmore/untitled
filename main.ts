@@ -4,12 +4,17 @@ input.onPinPressed(TouchPin.P0, function () {
     basic.pause(100)
     basic.clearScreen()
 })
+input.onPinReleased(TouchPin.P2, function () {
+    game_varible = 1
+})
 input.onButtonPressed(Button.A, function () {
-    basic.showNumber(minutes)
-    basic.clearScreen()
+    if (0 == game_varible) {
+        basic.showNumber(minutes)
+    }
 })
 input.onGesture(Gesture.TiltLeft, function () {
-	
+    game_varible = 0
+    basic.showNumber(0)
 })
 input.onButtonPressed(Button.AB, function () {
     STARTSTOPWATCH = input.runningTime()
@@ -27,6 +32,8 @@ input.onPinPressed(TouchPin.P1, function () {
 input.onGesture(Gesture.Shake, function () {
     Steps += 1
 })
+let sprite: game.LedSprite = null
+let game_varible = 0
 let STARTSTOPWATCH = 0
 let stopwatch_number_vaule = 0
 let Steps = 0
@@ -160,6 +167,31 @@ basic.forever(function () {
     }
     if (10 <= Steps) {
         music.stopAllSounds()
+    }
+})
+basic.forever(function () {
+    basic.pause(1000)
+    if (game_varible == 1) {
+        if (input.buttonIsPressed(Button.A)) {
+            if (sprite.get(LedSpriteProperty.X) == 2) {
+                game.addScore(1)
+            } else {
+                game.gameOver()
+                basic.clearScreen()
+            }
+        }
+    } else {
+        basic.clearScreen()
+    }
+})
+basic.forever(function () {
+    if (game_varible == 1) {
+        sprite = game.createSprite(2, 2)
+        sprite.ifOnEdgeBounce()
+        basic.pause(100)
+        sprite.move(1)
+    } else {
+        basic.clearScreen()
     }
 })
 basic.forever(function () {
