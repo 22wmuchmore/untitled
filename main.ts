@@ -5,39 +5,20 @@ input.onPinPressed(TouchPin.P0, function () {
     basic.clearScreen()
 })
 input.onButtonPressed(Button.A, function () {
-    if (sprite) {
-        if (sprite.get(LedSpriteProperty.X) == 2) {
-            game.addScore(1)
-        } else {
-            game.gameOver()
-        }
-        if (sprite.get(LedSpriteProperty.X) == 3) {
-            game.addScore(1)
-        } else {
-            game.gameOver()
-        }
-        if (sprite.get(LedSpriteProperty.X) == 4) {
-            game.addScore(1)
-        } else {
-            game.gameOver()
-        }
-    }
+    basic.showNumber(minutes)
+    basic.clearScreen()
 })
 input.onGesture(Gesture.TiltLeft, function () {
 	
 })
-input.onGesture(Gesture.ScreenDown, function () {
-    basic.showNumber(minutes)
-    basic.clearScreen()
-})
 input.onButtonPressed(Button.AB, function () {
-    basic.showNumber(Steps)
-    basic.pause(100)
+    STARTSTOPWATCH = input.runningTime()
+    basic.showString("stopwatch started")
     basic.clearScreen()
 })
 input.onButtonPressed(Button.B, function () {
-    STARTSTOPWATCH = input.runningTime()
-    basic.showString("stopwatch started")
+    basic.showNumber(Steps)
+    basic.pause(100)
     basic.clearScreen()
 })
 input.onPinPressed(TouchPin.P1, function () {
@@ -46,7 +27,6 @@ input.onPinPressed(TouchPin.P1, function () {
 input.onGesture(Gesture.Shake, function () {
     Steps += 1
 })
-let sprite: game.LedSprite = null
 let STARTSTOPWATCH = 0
 let stopwatch_number_vaule = 0
 let Steps = 0
@@ -54,7 +34,7 @@ let minutes = 0
 minutes = 0
 Steps = 0
 basic.forever(function () {
-    basic.pause(60000)
+    basic.pause(5000)
     if (minutes > 60) {
         minutes += 1
     } else {
@@ -181,25 +161,27 @@ basic.forever(function () {
     if (10 <= Steps) {
         music.stopAllSounds()
     }
+})
+basic.forever(function () {
     if (minutes == 830) {
-        basic.showString("exercise")
+        basic.showString("exercise and drink water")
     }
     if (minutes == 930) {
-        basic.showString("exercise")
+        basic.showString("exercise and drink water")
     }
     if (minutes == 1030) {
-        basic.showString("exercise")
+        basic.showString("exercise and drink water")
     }
     if (minutes == 1130) {
-        basic.showString("exercise")
+        basic.showString("exercise and drink water")
     }
     if (minutes == 2400) {
         Steps = 0
     }
-    if (input.isGesture(Gesture.TiltLeft)) {
-        sprite = game.createSprite(2, 2)
-        sprite.move(1)
-        basic.pause(100)
-        sprite.ifOnEdgeBounce()
+    if (Steps == 5000) {
+        basic.showIcon(IconNames.Heart)
+        basic.showIcon(IconNames.Happy)
+        basic.showIcon(IconNames.Heart)
+        basic.showIcon(IconNames.Happy)
     }
 })
